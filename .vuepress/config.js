@@ -16,7 +16,8 @@ module.exports = {
     sidebar:
       [
         '/',
-        '/guia/'
+        '/calendario/',
+        '/wordpress-api/',
       ]
   }
  
