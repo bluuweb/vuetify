@@ -16,8 +16,10 @@ module.exports = {
     sidebar:
       [
         '/',
+        '/vuetify-2/',
         '/calendario/',
         '/wordpress-api/',
+        '/paginacion/',
       ]
   }
  
