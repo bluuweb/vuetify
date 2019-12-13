@@ -2,6 +2,8 @@
 
 Vamos a construir un calendario utilizando Vuetify & Firebase, [https://medium.com/@jsfanatik/how-to-build-an-event-calendar-with-vue-js-and-firebase-967d734f0ed0](https://medium.com/@jsfanatik/how-to-build-an-event-calendar-with-vue-js-and-firebase-967d734f0ed0)
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/I_rJi_Mkx7o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Instalación Vue CLI
 
 Hacer este paso solo si no tienes instalado Vue CLI

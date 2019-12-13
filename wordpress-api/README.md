@@ -1,6 +1,8 @@
 # Wordpress API
 Veamos como utilizar Wordpress en nuestros proyectos con Vue.js
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NBWRdxDhE6k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Documentacion: [https://developer.wordpress.org/rest-api/reference/](https://developer.wordpress.org/rest-api/reference/)
 
 ## Instalar Wordpress

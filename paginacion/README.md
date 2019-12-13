@@ -1,5 +1,6 @@
 # Páginación Firestore
 Veamos como crear una paginación con Firestore utilizando el CDN de Vuetify
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Bv7py0x5YmQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## CDN Vuetify
 Accede al siguiente enlace: [https://vuetifyjs.com/es-MX/getting-started/quick-start#uso-de-una-cdn](https://vuetifyjs.com/es-MX/getting-started/quick-start#uso-de-una-cdn)
@@ -167,5 +168,103 @@ siguiente() {
 ```html
 <v-container>
   <v-btn @click="siguiente" :disabled="desactivar">Más artículos...</v-btn>
+</v-container>
+```
+
+## Paginación 2.0
+Veamos como agregar mejoras
+
+Utilizaremos la paginación de Vuetify: [https://vuetifyjs.com/es-MX/components/paginations#long](https://vuetifyjs.com/es-MX/components/paginations#long)
+
+#### Agregar Componente:
+```html
+<!-- Paginación Vuetify -->
+<div class="text-center">
+  <v-container>
+    <v-row justify="center">
+      <v-col cols="8">
+        <v-container class="max-width">
+          <v-pagination
+            v-model="page"
+            class="my-4"
+            :length="paginas"
+            @input="onPageChange"
+          ></v-pagination>
+        </v-container>
+      </v-col>
+    </v-row>
+  </v-container>   
+</div>
+```
+
+#### Agregar data:
+```js
+data:{
+  entradas: [],
+  total: 0,
+  paginas: 0,
+  porPagina: 6,
+  page: 1
+},
+```
+
+#### Methods:
+```js
+methods: {
+  leerDatos(){
+
+    db.collection('blog').get().then(res => {
+      this.total = res.size
+      this.paginas = Math.ceil((this.total / this.porPagina)) // Redondea hacia arriba
+    })
+
+    db.collection('blog')
+      .limit(this.porPagina)
+      .orderBy('id')
+      .get()
+      .then(query => {
+        query.forEach(item => {
+          this.entradas.push(item.data())
+        })
+      })
+  },
+  onPageChange(){
+    db.collection('blog')
+      .limit(this.porPagina)
+      .orderBy('id')
+      .startAfter(this.porPagina*(this.page-1))
+      .get()
+      .then(query => {
+        this.entradas = []
+        query.forEach(item => {
+          this.entradas.push(item.data())
+        })
+      })
+  }
+},
+```
+
+#### Filtros optativos:
+```js
+filters:{
+  limite(value){
+    return value.substring(0, 90);
+  },
+  limiteTitulo(value){
+    return value.substring(0, 20);
+  }
+}
+```
+```html
+<v-container>
+  <v-row>
+    <v-col cols="12" md="4" v-for="(item, index) in entradas" :key="index">
+      <v-card>
+        <v-card-title>{{item.title | limiteTitulo}}</v-card-title>
+        <v-card-subtitle>{{item.id}}</v-card-subtitle>
+        <v-card-text>{{item.body | limite}}</v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
 </v-container>
 ```
